@@ -1,0 +1,3 @@
+rootProject.name = 'tttoe'
+
+include ':app'
