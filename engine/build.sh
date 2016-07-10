@@ -1,0 +1,1 @@
+tsc board.ts --module amd --outFile ./lib/engine.js --target ES5
