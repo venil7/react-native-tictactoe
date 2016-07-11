@@ -10,4 +10,10 @@ export class FieldUtils {
     if (field === Field.Cross) return Field.Nought;
     throw new Error("cant reverse none");
   }
+
+  static format(field: Field): string {
+    if (field === Field.Nought) return '[x]';
+    if (field === Field.Cross) return '[o]';
+    return '[ ]';
+  }
 }
