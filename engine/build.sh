@@ -1,1 +1,1 @@
-tsc board.ts --module amd --outFile ./lib/engine.js --target ES5
+tsc engine.ts --target ES2015 --outDir ./lib/

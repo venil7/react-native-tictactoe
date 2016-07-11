@@ -10,6 +10,7 @@
     "react": "15.2.0",
     "react-native": "0.28.0",
     "react-native-button": "^1.6.0",
+    "react-native-flexbox-grid": "^0.2.2",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2"
   }

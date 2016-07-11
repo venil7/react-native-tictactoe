@@ -1,12 +1,6 @@
-import { Field, FieldUtils } from './field';
-import { IState } from './state';
-import { Player } from './player';
-import { Eval } from './eval';
-
 const LENGTH = 9;
 
 export class Board {
-  // private fields: Field[] = [];
   private winning_combinations: number[][] = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -112,4 +106,60 @@ export class Board {
     });
     return str;
   }
+}
+
+export class Eval {
+  constructor(public score: number, public position: number = 0) {
+  }
+
+  static sorter(e1: Eval, e2: Eval): number {
+    if (e1.score < e2.score) return -1;
+    if (e1.score > e2.score) return 1;
+    return 0;
+  }
+}
+
+export enum Field {
+  None = 0,
+  Nought,
+  Cross
+}
+
+export class FieldUtils {
+  static reverse(field: Field): Field {
+    if (field === Field.Nought) return Field.Cross;
+    if (field === Field.Cross) return Field.Nought;
+    throw new Error("cant reverse none");
+  }
+
+  static format(field: Field): string {
+    if (field === Field.Nought) return '[x]';
+    if (field === Field.Cross) return '[o]';
+    return '[ ]';
+  }
+}
+
+export enum Player {
+  None = 0,
+  CPU,
+  Human
+}
+
+export class PlayerUtils {
+  static format(player: Player): string {
+    switch (player) {
+      case Player.CPU:
+        return 'CPU';
+      case Player.Human:
+        return 'Human';
+      default:
+        return 'None';
+    }
+  }
+}
+
+export interface IState {
+  game_over: boolean,
+  possible_moves: number[],
+  winner: Player
 }

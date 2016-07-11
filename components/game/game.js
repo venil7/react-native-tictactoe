@@ -4,14 +4,13 @@ import {
   Text,
   View
 } from 'react-native';
+import Board from './board';
 
 class Game extends Component {
   render() {
     return (
       <View>
-        <Text>
-          Game.....
-        </Text>
+        <Board />
       </View>
     );
   }
