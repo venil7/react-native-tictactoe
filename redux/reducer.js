@@ -1,18 +1,18 @@
+import { Board } from '../engine/lib/engine';
+
 const initState = {
-    view: 'index'
+    board: new Board()
 };
 
 export const changeView = (view) => {
-    return { type: 'CHANGE_VIEW', view };
+    return { type: 'GAME_MOVE', index };
 }
 
 const reducer = (state = initState, action) => {
     switch (action.type) {
-        case 'CHANGE_VIEW': {
-            return { ...state, view: action.view }; 
+        case 'GAME_MOVE': {
+            return { ...state, board: state.board.set(action.index) }
         }
-        default:
-            return state;
     }
 }
 
