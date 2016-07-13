@@ -5,29 +5,21 @@ import Cell from './cell';
 
 class Board extends Component {
   render() {
+    const colprops = { sm: 4, md: 4, lg: 4 };
+    const { onCellPress, board: { fields } } = this.props;
+    const indexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     return (
       <View>
-        <Row size={12}>
-          <Col sm={4} md={4} lg={4}>
-            <Cell />
-          </Col>
-          <Col sm={4} md={4} lg={4}>
-            <Cell />
-          </Col>
-          <Col sm={4} md={4} lg={4}>
-            <Cell />
-          </Col>
-        </Row>
-        <Row size={12}>
-          <Col sm={4} md={4} lg={4}>
-            <Cell />
-          </Col>
-          <Col sm={4} md={4} lg={4}>
-            <Cell />
-          </Col>
-          <Col sm={4} md={4} lg={4}>
-            <Cell />
-          </Col>
+        <Row sm={12}>
+          {indexes.map((i) => (
+            <Col key={i} {...colprops}>
+              <Cell
+                index={i}
+                cell={fields[i]}
+                onPress={(i) => onCellPress(i)}
+              />
+            </Col>
+          ))}
         </Row>
       </View>
     );

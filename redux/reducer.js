@@ -4,15 +4,25 @@ const initState = {
     board: new Board()
 };
 
-export const changeView = (view) => {
-    return { type: 'GAME_MOVE', index };
+const cpuMove = (board) => {
+    return { type: 'CPU_MOVE', board };
+}
+export const humanMoveThunk = (index) => (dispatch, getState) => {
+    dispatch({ type: 'HUMAN_MOVE', index });
+    let board = getState().board.cpu();
+    dispatch({ type: 'CPU_MOVE', board })
 }
 
 const reducer = (state = initState, action) => {
     switch (action.type) {
-        case 'GAME_MOVE': {
-            return { ...state, board: state.board.set(action.index) }
+        case 'HUMAN_MOVE': {
+            return { ...state, board: state.board.set(action.index) };
         }
+        case 'CPU_MOVE': {
+            return { ...state, board: action.board };
+        }
+        default:
+            return state;
     }
 }
 
