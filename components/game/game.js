@@ -4,7 +4,8 @@ import { humanMoveThunk } from '../../redux/reducer';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 import Board from './board';
 
@@ -18,7 +19,7 @@ class Game extends Component {
   render() {
     const { state: { board } } = this.props;
     return (
-      <View style={{ width: 100 }}>
+      <View style={{alignSelf:'stretch'}}>
         <Board
           board={board}
           onCellPress={(i) => this.humanMove(i)}

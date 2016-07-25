@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image, TouchableHighlight } from 'react-native';
 import { Field } from '../../engine/lib/engine';
-import Button from 'react-native-button';
+
+const nought = require('./img/nought.png');
+const cross = require('./img/cross.png');
+const empty = require('./img/transp.png');
 
 class Cell extends Component {
   render() {
     const { cell, onPress, index } = this.props;
-    const display = (cell === Field.Cross)
-      ? 'X' : (cell == Field.Nought) ? 'O' : '';
+    const source = (cell === Field.Cross)
+      ? cross : (cell == Field.Nought) ? nought : empty;
     return (
-      <View style={{borderColor: 'black', borderRadius: 2, borderWidth: 2, margin: 2 }}>
-        <Button
-          containerStyle={{ padding: 10, height: 45, overflow: 'hidden' }}
-          style={{ fontSize: 20, color: 'black' }}
-          onPress={() => { onPress(index) }}>
-          {display}
-        </Button>
+      <View style={{borderWidth: 1, margin: 2, borderRadius: 15, borderColor: 'black', height: 128}}>
+        <TouchableHighlight
+          onPress={() => onPress(index)}>
+          <Image 
+            source={source} 
+          />
+        </TouchableHighlight>
       </View>
     );
   }

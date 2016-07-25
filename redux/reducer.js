@@ -1,7 +1,10 @@
 import { Board } from '../engine/lib/engine';
 
-const initState = {
-    board: new Board()
+const initState = () => {
+    const board = new Board();
+    return {
+        board,
+    }
 };
 
 const cpuMove = (board) => {
@@ -9,11 +12,13 @@ const cpuMove = (board) => {
 }
 export const humanMoveThunk = (index) => (dispatch, getState) => {
     dispatch({ type: 'HUMAN_MOVE', index });
-    let board = getState().board.cpu();
-    dispatch({ type: 'CPU_MOVE', board })
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(getState().board.cpu()), 100);
+    })
+    .then((board) => dispatch({ type: 'CPU_MOVE', board }));
 }
 
-const reducer = (state = initState, action) => {
+const reducer = (state = initState(), action) => {
     switch (action.type) {
         case 'HUMAN_MOVE': {
             return { ...state, board: state.board.set(action.index) };
